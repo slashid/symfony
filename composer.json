@@ -1,0 +1,27 @@
+{
+    "name": "slashid/symfony",
+    "description": "SlashID integration bundle for Symfony.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Slashid\\Symfony\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "José San Martin",
+            "email": "jose@josesanmartin.net"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "slashid/php": "dev-main#381f73bbcb2f9090751ada824bc4fdb5e0b9f8c6"
+    },
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/slashid/php"
+        }
+    ]
+}
