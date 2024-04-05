@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a32ded193f97e3b25bd29250b123469",
+    "content-hash": "c5c36f94f6a98c344c4d98c9a672f896",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -71,16 +71,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.9.x-dev",
+            "version": "7.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "1ee81e5fc8613ba1ad0b095f40e17c119dd4cc93"
+                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/1ee81e5fc8613ba1ad0b095f40e17c119dd4cc93",
-                "reference": "1ee81e5fc8613ba1ad0b095f40e17c119dd4cc93",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/41042bc7ab002487b876a0683fc8dce04ddce104",
+                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104",
                 "shasum": ""
             },
             "require": {
@@ -97,7 +97,7 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "ext-curl": "*",
-                "guzzle/client-integration-tests": "3.0.2",
+                "php-http/client-integration-tests": "dev-master#2c025848417c1135031fdf9c728ee53d0a7ceaee as 3.0.999",
                 "php-http/message-factory": "^1.1",
                 "phpunit/phpunit": "^8.5.36 || ^9.6.15",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
@@ -177,7 +177,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.9"
+                "source": "https://github.com/guzzle/guzzle/tree/7.8.1"
             },
             "funding": [
                 {
@@ -193,20 +193,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-31T19:57:34+00:00"
+            "time": "2023-12-03T20:35:24+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.0.x-dev",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "ab801747cbf7d394d4d435c34364704f9bf048e6"
+                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/ab801747cbf7d394d4d435c34364704f9bf048e6",
-                "reference": "ab801747cbf7d394d4d435c34364704f9bf048e6",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/bbff78d96034045e58e13dedd6ad91b5d1253223",
+                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223",
                 "shasum": ""
             },
             "require": {
@@ -216,7 +216,6 @@
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "phpunit/phpunit": "^8.5.36 || ^9.6.15"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -261,7 +260,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0"
+                "source": "https://github.com/guzzle/promises/tree/2.0.2"
             },
             "funding": [
                 {
@@ -277,20 +276,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-31T10:06:07+00:00"
+            "time": "2023-12-03T20:19:20+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.6.x-dev",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "a243f80a1ca7fe8ceed4deee17f12c1930efe662"
+                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a243f80a1ca7fe8ceed4deee17f12c1930efe662",
-                "reference": "a243f80a1ca7fe8ceed4deee17f12c1930efe662",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/45b30f99ac27b5ca93cb4831afe16285f57b8221",
+                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221",
                 "shasum": ""
             },
             "require": {
@@ -311,7 +310,6 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -378,7 +376,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.6"
+                "source": "https://github.com/guzzle/psr7/tree/2.6.2"
             },
             "funding": [
                 {
@@ -394,33 +392,29 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-31T10:09:24+00:00"
+            "time": "2023-12-03T20:05:35+00:00"
         },
         {
             "name": "psr/cache",
-            "version": "dev-master",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "0a7c67d0d1c8167b342eb74339d6f961663826ce"
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/0a7c67d0d1c8167b342eb74339d6f961663826ce",
-                "reference": "0a7c67d0d1c8167b342eb74339d6f961663826ce",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0.0"
             },
-            "suggest": {
-                "fig/cache-util": "Provides some useful PSR-6 utilities"
-            },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -445,13 +439,13 @@
                 "psr-6"
             ],
             "support": {
-                "source": "https://github.com/php-fig/cache/tree/master"
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
             },
-            "time": "2021-02-24T03:25:37+00:00"
+            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/http-client",
-            "version": "dev-master",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-client.git",
@@ -467,7 +461,6 @@
                 "php": "^7.0 || ^8.0",
                 "psr/http-message": "^1.0 || ^2.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -504,23 +497,22 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "7037f4b0950474e9d1350e8df89b15f1842085f6"
+                "reference": "e616d01114759c4c489f93b099585439f795fe35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/7037f4b0950474e9d1350e8df89b15f1842085f6",
-                "reference": "7037f4b0950474e9d1350e8df89b15f1842085f6",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
+                "reference": "e616d01114759c4c489f93b099585439f795fe35",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0.0",
                 "psr/http-message": "^1.0 || ^2.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -542,7 +534,7 @@
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
-            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
+            "description": "Common interfaces for PSR-7 HTTP message factories",
             "keywords": [
                 "factory",
                 "http",
@@ -554,13 +546,13 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory"
+                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
             },
-            "time": "2023-09-22T11:16:44+00:00"
+            "time": "2023-04-10T20:10:41+00:00"
         },
         {
             "name": "psr/http-message",
-            "version": "dev-master",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
@@ -575,7 +567,6 @@
             "require": {
                 "php": "^7.2 || ^8.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -658,16 +649,16 @@
         },
         {
             "name": "slashid/php",
-            "version": "dev-main",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:slashid/php.git",
-                "reference": "381f73bbcb2f9090751ada824bc4fdb5e0b9f8c6"
+                "url": "https://github.com/slashid/php.git",
+                "reference": "2a04b2218354e2b4fee0541fcf3479aa7edb12ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slashid/php/zipball/381f73bbcb2f9090751ada824bc4fdb5e0b9f8c6",
-                "reference": "381f73bbcb2f9090751ada824bc4fdb5e0b9f8c6",
+                "url": "https://api.github.com/repos/slashid/php/zipball/2a04b2218354e2b4fee0541fcf3479aa7edb12ec",
+                "reference": "2a04b2218354e2b4fee0541fcf3479aa7edb12ec",
                 "shasum": ""
             },
             "require": {
@@ -683,7 +674,6 @@
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^10.5"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -691,28 +681,7 @@
                     "SlashId\\Test\\Php\\": "tests/unit/src/"
                 }
             },
-            "scripts": {
-                "test-cs": [
-                    "vendor/bin/php-cs-fixer check --rules=@Symfony,@PER-CS2.0 ."
-                ],
-                "test-cs-fix": [
-                    "vendor/bin/php-cs-fixer fix --rules=@Symfony,@PER-CS2.0 ."
-                ],
-                "test-phpstan": [
-                    "vendor/bin/phpstan analyse src -l 9"
-                ],
-                "test-phpunit": [
-                    "vendor/bin/phpunit tests/unit/"
-                ],
-                "test-phpunit-coverage": [
-                    "vendor/bin/phpunit --coverage-html tests/coverage --coverage-filter src/ tests/unit/"
-                ],
-                "test": [
-                    "composer test-cs",
-                    "composer test-phpstan",
-                    "composer test-phpunit-coverage"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -724,33 +693,32 @@
             ],
             "description": "PHP SDK for integrating with SlashID API.",
             "support": {
-                "source": "https://github.com/slashid/php/tree/main",
-                "issues": "https://github.com/slashid/php/issues"
+                "issues": "https://github.com/slashid/php/issues",
+                "source": "https://github.com/slashid/php/tree/1.0.2"
             },
-            "time": "2024-04-01T08:00:31+00:00"
+            "time": "2024-04-04T16:13:02+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "dev-main",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "2c438b99bb2753c1628c1e6f523991edea5b03a4"
+                "reference": "7c3aff79d10325257a001fcf92d991f24fc967cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/2c438b99bb2753c1628c1e6f523991edea5b03a4",
-                "reference": "2c438b99bb2753c1628c1e6f523991edea5b03a4",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/7c3aff79d10325257a001fcf92d991f24fc967cf",
+                "reference": "7c3aff79d10325257a001fcf92d991f24fc967cf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.5-dev"
+                    "dev-main": "3.4-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -779,7 +747,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/main"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.4.0"
             },
             "funding": [
                 {
@@ -795,15 +763,13 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-02T14:07:37+00:00"
+            "time": "2023-05-23T14:45:45+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "slashid/php": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
