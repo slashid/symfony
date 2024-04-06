@@ -1,0 +1,3 @@
+login:
+    path: /login
+    controller: Slashid\Symfony\Controller\LoginController::login
