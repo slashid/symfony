@@ -27,6 +27,7 @@ class SlashIdSymfonyBundle extends AbstractBundle
                 ->public()
                 ->args([
                     new Reference('twig'),
+                    new Reference(SlashIdSdk::class),
                 ])
 
             ->set(SlashIdSdk::class)
