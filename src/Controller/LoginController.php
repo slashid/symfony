@@ -4,6 +4,9 @@ namespace Slashid\Symfony\Controller;
 
 use SlashId\Php\SlashIdSdk;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -12,12 +15,17 @@ class LoginController
 {
     public function __construct(
         protected Environment $twig,
+        protected Security $security,
         protected SlashIdSdk $sdk,
     )
     {}
 
     public function login(): Response
     {
+        if ($this->security->getUser()) {
+            return new RedirectResponse($this->getPostLoginDestination());
+        }
+
         // @todo Add configuration
         $attributes = [
             'oid' => $this->sdk->getOrganizationId(),
@@ -37,5 +45,17 @@ class LoginController
         return new Response($this->twig->render('@slashid/login/login.html.twig', [
             'attributes' => $attributes,
         ]));
+    }
+
+    public function loginCallback(): Response
+    {
+        return new JsonResponse([
+            'success' => true,
+            'redirect' => $this->getPostLoginDestination(),
+        ]);
+    }
+
+    protected function getPostLoginDestination(): string{
+        return '/aaa';
     }
 }

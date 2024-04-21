@@ -1,14 +1,13 @@
 function slashIdLoginSuccessCallback(user) {
     // Convert the SlashID token into a Symfony cookie.
-    fetch(SlashIdSettings.loginCallbackUrl, {
+    fetch('/login/callback', {
         method: "POST",
         cache: "no-cache",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRF-Token": SlashIdSettings.csfrToken
-        },
-        body: "token=" + user._token
+            "Authorization": "Bearer " + user._token
+        }
     })
     .then(async (response) => {
         const jsonResponse = await response.json();
