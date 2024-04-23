@@ -31,8 +31,11 @@ class UserProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        return SlashIdUser::fromValues($this->sdk->get('/persons/' . $identifier, [
+        /** @var array{active: bool, person_id: string, roles: string[], attributes: array<string, array<string, string|int|mixed[]|null>>, region: string, handles: array{type: string, value: string}[], groups: string[]} $values */
+        $values = $this->sdk->get('/persons/' . $identifier, [
             'fields' => ['handles', 'groups', 'attributes'],
-        ]));
+        ]);
+
+        return SlashIdUser::fromValues($values);
     }
 }
