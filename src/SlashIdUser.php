@@ -26,6 +26,6 @@ class SlashIdUser extends Person implements UserInterface
             return $personId;
         }
 
-        throw new \LogicException("Calling getUserIdentifier() on a user without an identifier.");
+        throw new \LogicException('Calling getUserIdentifier() on a user without an identifier.');
     }
 }
