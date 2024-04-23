@@ -11,9 +11,11 @@ class SlashIdUser extends Person implements UserInterface
     {
         return array_merge(
             ['ROLE_USER'],
-            array_map(
-                fn(string $group) => 'ROLE_' . strtoupper($group),
-                $this->getGroups(),
+            array_unique(
+                array_map(
+                    fn(string $group) => 'ROLE_' . strtoupper($group),
+                    $this->getGroups(),
+                ),
             ),
         );
     }
