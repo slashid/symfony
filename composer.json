@@ -7,6 +7,11 @@
             "SlashId\\Symfony\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "SlashId\\Test\\Symfony\\": "tests/unit/src"
+        }
+    },
     "authors": [
         {
             "name": "José San Martin",
