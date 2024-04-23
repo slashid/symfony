@@ -32,7 +32,7 @@
     "scripts": {
         "test-cs": "vendor/bin/php-cs-fixer check --rules=@Symfony,@PER-CS2.0 .",
         "test-cs-fix": "vendor/bin/php-cs-fixer fix --rules=@Symfony,@PER-CS2.0 .",
-        "test-phpstan": "vendor/bin/phpstan analyse src config -l 9",
+        "test-phpstan": "vendor/bin/phpstan analyse src -l 9",
         "test-phpunit": "vendor/bin/phpunit tests/unit/",
         "test-phpunit-coverage": "vendor/bin/phpunit --coverage-html tests/coverage --coverage-filter src/ tests/unit/",
         "test": [
