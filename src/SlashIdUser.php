@@ -22,6 +22,10 @@ class SlashIdUser extends Person implements UserInterface
 
     public function getUserIdentifier(): string
     {
-        return $this->getPersonId();
+        if ($personId = $this->getPersonId()) {
+            return $personId;
+        }
+
+        throw new \LogicException("Calling getUserIdentifier() on a user without an identifier.");
     }
 }

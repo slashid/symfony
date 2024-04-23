@@ -27,6 +27,8 @@ class Authenticator extends AbstractAuthenticator
 
     public function authenticate(Request $request): Passport
     {
+        // We know the header exists because it was checked on supports() */
+        /** @var string */
         $token = $request->headers->get('Authorization');
         $token = substr($token, 7);
 
