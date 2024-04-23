@@ -4,7 +4,7 @@ namespace Slashid\Symfony;
 
 use SlashId\Php\SlashIdSdk;
 use Slashid\Symfony\Controller\LoginController;
-use Slashid\Symfony\Security\StatefulAuthenticator;
+use Slashid\Symfony\Security\Authenticator;
 use Slashid\Symfony\Security\UserProvider;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -45,7 +45,7 @@ class SlashIdSymfonyBundle extends AbstractBundle
                 ->public()
                 ->args([new Reference('slashid')])
 
-            ->set('slashid.authenticator.stateful', StatefulAuthenticator::class)
+            ->set('slashid.authenticator', Authenticator::class)
                 ->public()
                 ->args([new Reference('slashid')])
         ;

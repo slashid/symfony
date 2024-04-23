@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
-class StatefulAuthenticator extends AbstractAuthenticator
+class Authenticator extends AbstractAuthenticator
 {
     public function __construct(
         protected SlashIdSdk $sdk,
