@@ -4,7 +4,6 @@ namespace Slashid\Symfony\Security;
 
 use SlashId\Php\SlashIdSdk;
 use Slashid\Symfony\SlashIdUser;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
