@@ -3,6 +3,7 @@
 namespace Slashid\Symfony;
 
 use SlashId\Php\SlashIdSdk;
+use Slashid\Symfony\Command\Webhook\WebhookListCommand;
 use Slashid\Symfony\Controller\LoginController;
 use Slashid\Symfony\Controller\WebhookController;
 use Slashid\Symfony\Security\StatefulAuthenticator;
@@ -37,11 +38,17 @@ class SlashIdSymfonyBundle extends AbstractBundle
             ->set(WebhookController::class)
                 ->public()
                 ->args([
-                    new Reference('cache.adapter.filesystem'),
+                    new Reference('cache.app'),
                     new Reference('event_dispatcher'),
                     new Reference('request_stack'),
                     new Reference('slashid'),
                 ])
+
+            ->set(WebhookListCommand::class)
+                ->args([
+                    new Reference('slashid'),
+                ])
+                ->tag('console.command', ['command' => 'slashid:webhook:list'])
 
             ->set('slashid', SlashIdSdk::class)
                 ->public()
