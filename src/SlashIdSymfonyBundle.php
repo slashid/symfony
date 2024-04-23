@@ -3,6 +3,7 @@
 namespace Slashid\Symfony;
 
 use SlashId\Php\SlashIdSdk;
+use Slashid\Symfony\Command\Webhook\WebhookDeletionCommand;
 use Slashid\Symfony\Command\Webhook\WebhookListCommand;
 use Slashid\Symfony\Command\Webhook\WebhookRegistrationCommand;
 use Slashid\Symfony\Controller\LoginController;
@@ -57,6 +58,12 @@ class SlashIdSymfonyBundle extends AbstractBundle
                     new Reference('slashid'),
                 ])
                 ->tag('console.command', ['command' => 'slashid:webhook:register'])
+
+            ->set(WebhookDeletionCommand::class)
+                ->args([
+                    new Reference('slashid'),
+                ])
+                ->tag('console.command', ['command' => 'slashid:webhook:delete'])
 
             ->set('slashid', SlashIdSdk::class)
                 ->public()

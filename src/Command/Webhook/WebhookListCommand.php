@@ -42,4 +42,11 @@ class WebhookListCommand extends Command
 
         return Command::SUCCESS;
     }
+
+    protected function configure(): void
+    {
+        $this
+            ->setDescription('Lists existing SlashID webhooks');
+        ;
+    }
 }

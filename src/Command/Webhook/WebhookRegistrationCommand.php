@@ -13,17 +13,6 @@ use Symfony\Component\Routing\Router;
 
 class WebhookRegistrationCommand extends Command
 {
-    protected function configure(): void
-    {
-        $this
-            ->setDescription('Creates or updates a SlashID webhook')
-            ->addArgument('name', mode: InputArgument::REQUIRED, description: 'The name of the webhook')
-            ->addArgument('triggers', mode: InputArgument::OPTIONAL | InputArgument::IS_ARRAY, description: 'The name of the webhook')
-            ->addOption('base-url', mode: InputOption::VALUE_REQUIRED, description: 'An optional URL for the base to which /slashid/webhook will be appended')
-            ->addOption('webhook-url', mode: InputOption::VALUE_REQUIRED, description: 'An optional, arbitrary URL for the listener')
-        ;
-    }
-
     public function __construct(
         protected Router $router,
         protected SlashIdSdk $sdk,
@@ -66,5 +55,16 @@ class WebhookRegistrationCommand extends Command
         $this->sdk->webhook()->register($webhookRoute, $name, $triggers);
 
         return Command::SUCCESS;
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->setDescription('Creates or updates a SlashID webhook')
+            ->addArgument('name', mode: InputArgument::REQUIRED, description: 'The name of the webhook')
+            ->addArgument('triggers', mode: InputArgument::OPTIONAL | InputArgument::IS_ARRAY, description: 'The name of the webhook')
+            ->addOption('base-url', mode: InputOption::VALUE_REQUIRED, description: 'An optional URL for the base to which /slashid/webhook will be appended')
+            ->addOption('webhook-url', mode: InputOption::VALUE_REQUIRED, description: 'An optional, arbitrary URL for the listener')
+        ;
     }
 }
