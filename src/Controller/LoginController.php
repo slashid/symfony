@@ -56,6 +56,6 @@ class LoginController
     }
 
     protected function getPostLoginDestination(): string{
-        return '/aaa';
+        return '/';
     }
 }
