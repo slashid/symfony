@@ -1,5 +1,7 @@
 <?php
 
+namespace Slashid\Symfony\Event;
+
 use Symfony\Contracts\EventDispatcher\Event;
 
 final class WebhookEvent extends Event {

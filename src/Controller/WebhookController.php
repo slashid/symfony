@@ -2,19 +2,19 @@
 
 namespace Slashid\Symfony\Controller;
 
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use SlashId\Php\SlashIdSdk;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Slashid\Symfony\Event\WebhookEvent;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use WebhookEvent;
 
 class WebhookController
 {
     public function __construct(
-        protected FilesystemAdapter $cache,
-        protected EventDispatcher $dispatcher,
+        protected CacheItemPoolInterface $cache,
+        protected EventDispatcherInterface $dispatcher,
         protected RequestStack $requestStack,
         protected SlashIdSdk $sdk,
     )

@@ -3,7 +3,6 @@
 namespace Slashid\Symfony\Command\Webhook;
 
 use SlashId\Php\SlashIdSdk;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class WebhookListCommand extends Command
 {
-
     public function __construct(
         protected SlashIdSdk $sdk,
     ) {
@@ -20,6 +18,7 @@ class WebhookListCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
+        $rows = [];
         foreach ($this->sdk->webhook()->findAll() as $webhook) {
             $rows[] = [
                 $webhook['id'],
@@ -29,7 +28,7 @@ class WebhookListCommand extends Command
             ];
         }
 
-        if (!empty($rows) > 1) {
+        if (!empty($rows)) {
             $output->writeln('Webhooks for organization '.$this->sdk->getOrganizationId());
             (new Table($output))
                 ->setHeaders(['ID', 'Name', 'URL', 'Triggers'])
