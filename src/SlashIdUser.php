@@ -1,6 +1,6 @@
 <?php
 
-namespace Slashid\Symfony;
+namespace SlashId\Symfony;
 
 use SlashId\Php\Person;
 use Symfony\Component\Security\Core\User\UserInterface;

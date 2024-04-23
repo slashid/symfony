@@ -1,6 +1,6 @@
 <?php
 
-namespace Slashid\Symfony\Controller;
+namespace SlashId\Symfony\Controller;
 
 use SlashId\Php\SlashIdSdk;
 use Symfony\Bundle\SecurityBundle\Security;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Slashid\Symfony\Security;
+namespace SlashId\Symfony\Security;
 
 use SlashId\Php\SlashIdSdk;
 use Symfony\Component\HttpFoundation\JsonResponse;

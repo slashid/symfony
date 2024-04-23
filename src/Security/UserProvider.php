@@ -1,9 +1,9 @@
 <?php
 
-namespace Slashid\Symfony\Security;
+namespace SlashId\Symfony\Security;
 
 use SlashId\Php\SlashIdSdk;
-use Slashid\Symfony\SlashIdUser;
+use SlashId\Symfony\SlashIdUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 

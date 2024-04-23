@@ -1,11 +1,11 @@
 <?php
 
-namespace Slashid\Symfony;
+namespace SlashId\Symfony;
 
 use SlashId\Php\SlashIdSdk;
-use Slashid\Symfony\Controller\LoginController;
-use Slashid\Symfony\Security\Authenticator;
-use Slashid\Symfony\Security\UserProvider;
+use SlashId\Symfony\Controller\LoginController;
+use SlashId\Symfony\Security\Authenticator;
+use SlashId\Symfony\Security\UserProvider;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
