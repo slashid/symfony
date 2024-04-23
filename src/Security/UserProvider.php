@@ -7,12 +7,18 @@ use Slashid\Symfony\SlashIdUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * @implements UserProviderInterface<SlashIdUser>
+ */
 class UserProvider implements UserProviderInterface
 {
     public function __construct(
         protected SlashIdSdk $sdk,
     ) {}
 
+    /**
+     * @param SlashIdUser $user
+     */
     public function refreshUser(UserInterface $user): UserInterface
     {
         return $user;

@@ -21,6 +21,9 @@ class SlashIdSymfonyBundle extends AbstractBundle
         $definition->import('../config/definition.php');
     }
 
+    /**
+     * @param string[][] $config
+     */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         $container->services()
