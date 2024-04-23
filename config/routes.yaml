@@ -5,3 +5,7 @@ login:
 login.callback:
     path: /login/callback
     controller: Slashid\Symfony\Controller\LoginController::loginCallback
+
+webhook:
+    path: /slashid/webhook
+    controller: Slashid\Symfony\Controller\WebhookController::webhook

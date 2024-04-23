@@ -4,6 +4,7 @@ namespace Slashid\Symfony;
 
 use SlashId\Php\SlashIdSdk;
 use Slashid\Symfony\Controller\LoginController;
+use Slashid\Symfony\Controller\WebhookController;
 use Slashid\Symfony\Security\StatefulAuthenticator;
 use Slashid\Symfony\Security\UserProvider;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
@@ -30,6 +31,15 @@ class SlashIdSymfonyBundle extends AbstractBundle
                 ->args([
                     new Reference('twig'),
                     new Reference('security.helper'),
+                    new Reference('slashid'),
+                ])
+
+            ->set(WebhookController::class)
+                ->public()
+                ->args([
+                    new Reference('cache.adapter.filesystem'),
+                    new Reference('event_dispatcher'),
+                    new Reference('request_stack'),
                     new Reference('slashid'),
                 ])
 
