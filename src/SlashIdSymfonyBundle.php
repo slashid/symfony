@@ -40,6 +40,7 @@ class SlashIdSymfonyBundle extends AbstractBundle
                     $config['connection']['organization_id'],
                     $config['connection']['api_key'],
                 ])
+            ->alias(SlashIdSdk::class, 'slashid')
 
             ->set('slashid.user_provider', UserProvider::class)
                 ->public()
