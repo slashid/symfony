@@ -21,12 +21,13 @@ class UserProvider implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user): UserInterface
     {
+        // We don't have a local database storage, so there is nothing to refresh.
         return $user;
     }
 
     public function supportsClass(string $class): bool
     {
-        return true;
+        return $class === SlashIdUser::class;
     }
 
     public function loadUserByIdentifier(string $identifier): UserInterface
