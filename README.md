@@ -183,7 +183,7 @@ You can also use the `hasGroup` / `hasAnyGroup` / `hasAllGroups` methods to buil
 
     {% if app.user.hasAnyGroup(['Admin', 'Editor']) %}
 
-        <p>Information both Editors & Admins can access.</p>
+        <p>Information both Editors and Admins can access.</p>
 
     {% endif %}
 
