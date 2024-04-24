@@ -30,11 +30,9 @@ class SlashIdSymfonyBundleTest extends TestCase
     public function testLoadExtension(): void
     {
         $config = [
-            'connection' => [
-                'environment' => SlashIdSdk::ENVIRONMENT_PRODUCTION,
-                'organization_id' => 'ORG_ID',
-                'api_key' => 'API_KEY',
-            ],
+            'environment' => SlashIdSdk::ENVIRONMENT_PRODUCTION,
+            'organization_id' => 'ORG_ID',
+            'api_key' => 'API_KEY',
         ];
         $parameterBag = new ParameterBag();
         $containerBuilder = new ContainerBuilder($parameterBag);
