@@ -22,7 +22,7 @@ class Authenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        return $request->headers->has('Authorization') && 0 === strpos($request->headers->get('Authorization'), 'Bearer ');
+        return $request->headers->has('Authorization') && 0 === strpos((string) $request->headers->get('Authorization'), 'Bearer ');
     }
 
     public function authenticate(Request $request): Passport
