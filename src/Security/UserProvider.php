@@ -27,7 +27,7 @@ class UserProvider implements UserProviderInterface
 
     public function supportsClass(string $class): bool
     {
-        return $class === SlashIdUser::class;
+        return SlashIdUser::class === $class;
     }
 
     public function loadUserByIdentifier(string $identifier): UserInterface

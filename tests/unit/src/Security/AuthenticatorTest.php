@@ -70,7 +70,7 @@ class AuthenticatorTest extends TestCase
         ;
         $passport = $this->authenticator->authenticate($request);
         $this->assertInstanceOf(SelfValidatingPassport::class, $passport);
-        /** @var \Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge */
+        /** @var UserBadge */
         $badge = $passport->getBadges()[UserBadge::class];
         $this->assertEquals('9999-9999-9999', $badge->getUserIdentifier());
     }

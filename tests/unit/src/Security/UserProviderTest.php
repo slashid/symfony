@@ -45,11 +45,11 @@ class UserProviderTest extends TestCase
                 $this->identicalTo(['fields' => ['handles', 'groups', 'attributes']]),
             )
             ->willReturn([
-                'active' => TRUE,
+                'active' => true,
                 'person_id' => '9999-9999-9999',
                 'roles' => [],
                 'attributes' => [],
-                'region' =>'us-iowa',
+                'region' => 'us-iowa',
                 'handles' => [
                     ['type' => 'email_address', 'value' => 'user@example.com'],
                 ],
