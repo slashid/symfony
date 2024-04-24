@@ -1,14 +1,14 @@
 <?php
 
-namespace Slashid\Symfony;
+namespace SlashId\Symfony;
 
 use SlashId\Php\SlashIdSdk;
-use Slashid\Symfony\Command\Webhook\WebhookDeletionCommand;
-use Slashid\Symfony\Command\Webhook\WebhookListCommand;
-use Slashid\Symfony\Command\Webhook\WebhookRegistrationCommand;
-use Slashid\Symfony\Controller\LoginController;
-use Slashid\Symfony\Controller\WebhookController;
-use Slashid\Symfony\Security\StatefulAuthenticator;
+use SlashId\Symfony\Command\Webhook\WebhookDeletionCommand;
+use SlashId\Symfony\Command\Webhook\WebhookListCommand;
+use SlashId\Symfony\Command\Webhook\WebhookRegistrationCommand;
+use SlashId\Symfony\Controller\LoginController;
+use SlashId\Symfony\Controller\WebhookController;
+use SlashId\Symfony\Security\Authenticator;
 use Slashid\Symfony\Security\UserProvider;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,6 +25,9 @@ class SlashIdSymfonyBundle extends AbstractBundle
         $definition->import('../config/definition.php');
     }
 
+    /**
+     * @param string[][] $config
+     */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         $container->services()
@@ -68,16 +71,17 @@ class SlashIdSymfonyBundle extends AbstractBundle
             ->set('slashid', SlashIdSdk::class)
                 ->public()
                 ->args([
-                    $config['connection']['environment'],
-                    $config['connection']['organization_id'],
-                    $config['connection']['api_key'],
+                    $config['environment'],
+                    $config['organization_id'],
+                    $config['api_key'],
                 ])
+            ->alias(SlashIdSdk::class, 'slashid')
 
             ->set('slashid.user_provider', UserProvider::class)
                 ->public()
                 ->args([new Reference('slashid')])
 
-            ->set('slashid.authenticator.stateful', StatefulAuthenticator::class)
+            ->set('slashid.authenticator', Authenticator::class)
                 ->public()
                 ->args([new Reference('slashid')])
         ;

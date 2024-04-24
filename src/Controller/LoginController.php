@@ -1,14 +1,12 @@
 <?php
 
-namespace Slashid\Symfony\Controller;
+namespace SlashId\Symfony\Controller;
 
 use SlashId\Php\SlashIdSdk;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 class LoginController
@@ -17,8 +15,7 @@ class LoginController
         protected Environment $twig,
         protected Security $security,
         protected SlashIdSdk $sdk,
-    )
-    {}
+    ) {}
 
     public function login(): Response
     {
@@ -40,7 +37,7 @@ class LoginController
             ],
         ];
 
-        $attributes = array_map(fn ($option) => is_array($option) ? json_encode($option) : $option, $attributes);
+        $attributes = array_map(fn($option) => is_array($option) ? json_encode($option) : $option, $attributes);
 
         return new Response($this->twig->render('@slashid/login/login.html.twig', [
             'attributes' => $attributes,
@@ -55,7 +52,8 @@ class LoginController
         ]);
     }
 
-    protected function getPostLoginDestination(): string{
-        return '/aaa';
+    protected function getPostLoginDestination(): string
+    {
+        return '/';
     }
 }

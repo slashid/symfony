@@ -1,11 +1,11 @@
 login:
     path: /login
-    controller: Slashid\Symfony\Controller\LoginController::login
+    controller: SlashId\Symfony\Controller\LoginController::login
 
 login.callback:
     path: /login/callback
-    controller: Slashid\Symfony\Controller\LoginController::loginCallback
+    controller: SlashId\Symfony\Controller\LoginController::loginCallback
 
 slashid.webhook:
     path: /slashid/webhook
-    controller: Slashid\Symfony\Controller\WebhookController::webhook
+    controller: SlashId\Symfony\Controller\WebhookController::webhook

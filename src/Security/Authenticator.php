@@ -1,6 +1,6 @@
 <?php
 
-namespace Slashid\Symfony\Security;
+namespace SlashId\Symfony\Security;
 
 use SlashId\Php\SlashIdSdk;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
-class StatefulAuthenticator extends AbstractAuthenticator
+class Authenticator extends AbstractAuthenticator
 {
     public function __construct(
         protected SlashIdSdk $sdk,
@@ -22,11 +22,13 @@ class StatefulAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        return $request->headers->has('Authorization');
+        return $request->headers->has('Authorization') && 0 === strpos((string) $request->headers->get('Authorization'), 'Bearer ');
     }
 
     public function authenticate(Request $request): Passport
     {
+        // We know the header exists because it was checked on supports() */
+        /** @var string */
         $token = $request->headers->get('Authorization');
         $token = substr($token, 7);
 
