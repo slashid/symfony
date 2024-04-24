@@ -18,6 +18,7 @@ class WebhookDeletionCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var string */
         $id = $input->getArgument('id');
         $this->sdk->webhook()->deleteById($id);
         $output->writeln('Webhook with ID "' . $id . '" has been deleted.');

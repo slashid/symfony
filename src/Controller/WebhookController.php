@@ -21,7 +21,9 @@ class WebhookController
 
     public function webhook(): Response
     {
-        $decoded = $this->sdk->webhook()->decodeWebhookCall($this->requestStack->getCurrentRequest()->getContent(), $this->cache);
+        /** @var \Symfony\Component\HttpFoundation\Request */
+        $request = $this->requestStack->getCurrentRequest();
+        $decoded = $this->sdk->webhook()->decodeWebhookCall($request->getContent(), $this->cache);
 
         if (
             !is_array($decoded['trigger_content'])
