@@ -1,11 +1,11 @@
 <?php
 
-namespace Slashid\Symfony\Controller;
+namespace SlashId\Symfony\Controller;
 
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use SlashId\Php\SlashIdSdk;
-use Slashid\Symfony\Event\WebhookEvent;
+use SlashId\Symfony\Event\WebhookEvent;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;

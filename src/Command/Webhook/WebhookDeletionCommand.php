@@ -1,6 +1,6 @@
 <?php
 
-namespace Slashid\Symfony\Command\Webhook;
+namespace SlashId\Symfony\Command\Webhook;
 
 use SlashId\Php\SlashIdSdk;
 use Symfony\Component\Console\Command\Command;

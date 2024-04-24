@@ -9,7 +9,7 @@ use SlashId\Symfony\Command\Webhook\WebhookRegistrationCommand;
 use SlashId\Symfony\Controller\LoginController;
 use SlashId\Symfony\Controller\WebhookController;
 use SlashId\Symfony\Security\Authenticator;
-use Slashid\Symfony\Security\UserProvider;
+use SlashId\Symfony\Security\UserProvider;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
