@@ -39,9 +39,9 @@ class SlashIdSymfonyBundle extends AbstractBundle
             ->set('slashid', SlashIdSdk::class)
                 ->public()
                 ->args([
-                    $config['connection']['environment'],
-                    $config['connection']['organization_id'],
-                    $config['connection']['api_key'],
+                    $config['environment'],
+                    $config['organization_id'],
+                    $config['api_key'],
                 ])
             ->alias(SlashIdSdk::class, 'slashid')
 
