@@ -29,15 +29,14 @@ class WebhookListCommand extends Command
         }
 
         if (!empty($rows)) {
-            $output->writeln('Webhooks for organization '.$this->sdk->getOrganizationId());
+            $output->writeln('Webhooks for organization ' . $this->sdk->getOrganizationId());
             (new Table($output))
                 ->setHeaders(['ID', 'Name', 'URL', 'Triggers'])
                 ->setRows($rows)
                 ->render()
             ;
-
         } else {
-            $output->writeln('No webhooks found for organization '.$this->sdk->getOrganizationId());
+            $output->writeln('No webhooks found for organization ' . $this->sdk->getOrganizationId());
         }
 
         return Command::SUCCESS;
@@ -47,6 +46,5 @@ class WebhookListCommand extends Command
     {
         $this
             ->setDescription('Lists existing SlashID webhooks');
-        ;
     }
 }

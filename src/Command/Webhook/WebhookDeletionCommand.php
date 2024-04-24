@@ -4,7 +4,6 @@ namespace SlashId\Symfony\Command\Webhook;
 
 use SlashId\Php\SlashIdSdk;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +20,7 @@ class WebhookDeletionCommand extends Command
     {
         $id = $input->getArgument('id');
         $this->sdk->webhook()->deleteById($id);
-        $output->writeln('Webhook with ID "'.$id.'" has been deleted.');
+        $output->writeln('Webhook with ID "' . $id . '" has been deleted.');
 
         return Command::SUCCESS;
     }

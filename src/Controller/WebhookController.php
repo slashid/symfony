@@ -17,21 +17,20 @@ class WebhookController
         protected EventDispatcherInterface $dispatcher,
         protected RequestStack $requestStack,
         protected SlashIdSdk $sdk,
-    )
-    {}
+    ) {}
 
     public function webhook(): Response
     {
         $decoded = $this->sdk->webhook()->decodeWebhookCall($this->requestStack->getCurrentRequest()->getContent(), $this->cache);
 
         if (
-            ! is_array($decoded['trigger_content']) ||
-            empty($decoded['trigger_content']['event_metadata']) ||
-            ! is_array($decoded['trigger_content']['event_metadata']) ||
-            empty($decoded['trigger_content']['event_metadata']['event_name']) ||
-            ! is_string($decoded['trigger_content']['event_metadata']['event_name']) ||
-            empty($decoded['trigger_content']['event_metadata']['event_id']) ||
-            ! is_string($decoded['trigger_content']['event_metadata']['event_id'])
+            !is_array($decoded['trigger_content'])
+            || empty($decoded['trigger_content']['event_metadata'])
+            || !is_array($decoded['trigger_content']['event_metadata'])
+            || empty($decoded['trigger_content']['event_metadata']['event_name'])
+            || !is_string($decoded['trigger_content']['event_metadata']['event_name'])
+            || empty($decoded['trigger_content']['event_metadata']['event_id'])
+            || !is_string($decoded['trigger_content']['event_metadata']['event_id'])
         ) {
             throw new BadRequestException('Invalid Webhook call: missing trigger_content->event_metadata->event_name and trigger_content->event_metadata->event_id.');
         }

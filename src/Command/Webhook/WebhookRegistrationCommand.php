@@ -4,7 +4,6 @@ namespace SlashId\Symfony\Command\Webhook;
 
 use SlashId\Php\SlashIdSdk;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -44,13 +43,13 @@ class WebhookRegistrationCommand extends Command
             // --base-url is used when Laravel i behind a proxy. We concatenate the internal URL with the base URL.
             if ($baseUrl) {
                 $webhookRoute = $this->router->generate('slashid.webhook');
-                $webhookRoute = $baseUrl.$webhookRoute;
+                $webhookRoute = $baseUrl . $webhookRoute;
             } else {
                 $webhookRoute = $this->router->generate('slashid.webhook', referenceType: Router::ABSOLUTE_URL);
             }
         }
 
-        $output->writeln('Creating webhook "'.$name.'" for URL '.$webhookRoute.' with triggers '.implode(', ', $triggers));
+        $output->writeln('Creating webhook "' . $name . '" for URL ' . $webhookRoute . ' with triggers ' . implode(', ', $triggers));
 
         $this->sdk->webhook()->register($webhookRoute, $name, $triggers);
 
