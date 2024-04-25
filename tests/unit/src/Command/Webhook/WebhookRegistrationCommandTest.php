@@ -33,13 +33,13 @@ class WebhookRegistrationCommandTest extends CommandTestCase
             ->expects($this->exactly(2))
             ->method('getArgument')
             ->withAnyParameters()
-            ->willReturnCallback(fn ($argument) => $argument === 'name' ? 'webhook_name' : ['PersonDeleted_v1'])
+            ->willReturnCallback(fn($argument) => 'name' === $argument ? 'webhook_name' : ['PersonDeleted_v1'])
         ;
         $this->input
             ->expects($this->any())
             ->method('getOption')
             ->withAnyParameters()
-            ->willReturnCallback(fn ($option) => $option === 'webhook-url' ? $optionWebhookUrl : $optionBaseUrl)
+            ->willReturnCallback(fn($option) => 'webhook-url' === $option ? $optionWebhookUrl : $optionBaseUrl)
         ;
         $this->output
             ->expects($this->once())
@@ -47,8 +47,8 @@ class WebhookRegistrationCommandTest extends CommandTestCase
             ->with(
                 $this->identicalTo(
                     $expectedWebhookUrl ?
-                        'Creating webhook "webhook_name" for URL '.$expectedWebhookUrl.' with triggers PersonDeleted_v1' :
-                        'Webhooks are not enable for this installation. Either add "webhook_enable" => true to config/slashid.php or define a full URL with --webhook-url.'
+                        'Creating webhook "webhook_name" for URL ' . $expectedWebhookUrl . ' with triggers PersonDeleted_v1' :
+                        'Webhooks are not enable for this installation. Either add "webhook_enable" => true to config/slashid.php or define a full URL with --webhook-url.',
                 ),
             )
         ;
