@@ -40,7 +40,7 @@ class LoginController
         ];
 
         if ($this->config['analytics']) {
-            $attributes['analytics-enabled'] = 'analytics-enabled';
+            $attributes['analytics-enabled'] = NULL;
         }
 
         // Adds translation strings.
