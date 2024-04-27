@@ -47,6 +47,7 @@
             "composer test-cs",
             "composer test-phpstan",
             "composer test-phpunit-coverage"
-        ]
+        ],
+        "development-generate-translation": "SlashId\\Symfony\\Development\\TranslationYamlGenerator::generate"
     }
 }
