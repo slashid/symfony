@@ -12,6 +12,7 @@ use SlashId\Symfony\Security\Authenticator;
 use SlashId\Symfony\Security\UserProvider;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
@@ -36,9 +37,11 @@ class SlashIdSymfonyBundle extends AbstractBundle
                 ->public()
                 ->args([
                     $config['login_form'],
+                    $config['translation_strings'],
                     new Reference('twig'),
                     new Reference('security.helper'),
                     new Reference('slashid'),
+                    new Reference('translator', ContainerInterface::NULL_ON_INVALID_REFERENCE)
                 ])
 
             ->set(WebhookController::class)

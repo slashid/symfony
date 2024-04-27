@@ -7,15 +7,18 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class LoginController
 {
     public function __construct(
         protected array $config,
+        protected array $translationStrings,
         protected Environment $twig,
         protected Security $security,
         protected SlashIdSdk $sdk,
+        protected ?TranslatorInterface $translator,
     ) {}
 
     public function login(): Response
@@ -40,7 +43,13 @@ class LoginController
             $attributes['analytics-enabled'] = 'analytics-enabled';
         }
 
-
+        // Adds translation strings.
+        if ($this->translator) {
+            $attributes['text'] = array_map(
+                fn(string $string) => $this->translator->trans($string, domain: 'SlashIdSymfonyBundle'),
+                array_combine($this->translationStrings, $this->translationStrings),
+            );
+        }
 
         // Converts arrays to JSON.
         $attributes = array_map(fn($option) => is_array($option) ? json_encode($option) : $option, $attributes);
