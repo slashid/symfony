@@ -31,7 +31,7 @@ return static function (DefinitionConfigurator $definition) {
             ->cannotBeOverwritten()
             ->end()
 
-        ->arrayNode('login_form')->children()
+        ->arrayNode('login_form')->addDefaultsIfNotSet()->children()
             ->booleanNode('analytics')
                 ->defaultTrue()
                 ->end()
@@ -42,6 +42,10 @@ return static function (DefinitionConfigurator $definition) {
                 ->defaultFalse()
                 ->end()
             ->variableNode('configuration')
+                ->defaultValue([])
+                ->end()
+            ->variableNode('css_override')
+                ->defaultValue([])
                 ->end()
         ->end()
     ->end();
