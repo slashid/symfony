@@ -34,7 +34,8 @@
         "symfony/security-http": "^7",
         "symfony/config": "^7",
         "symfony/security-bundle": "^7",
-        "symfony/routing": "^7.0"
+        "symfony/routing": "^7.0",
+        "symfony/translation": "^7.0"
     },
     "scripts": {
         "test-cs": "vendor/bin/php-cs-fixer check --rules=@Symfony,@PER-CS2.0 .",
