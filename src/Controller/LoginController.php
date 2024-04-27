@@ -3,6 +3,7 @@
 namespace SlashId\Symfony\Controller;
 
 use SlashId\Php\SlashIdSdk;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,8 +15,10 @@ class LoginController
 {
     public function __construct(
         protected array $config,
+        protected ?string $afterLoginRoute,
         protected array $translationStrings,
         protected Environment $twig,
+        protected Router $router,
         protected Security $security,
         protected SlashIdSdk $sdk,
         protected ?TranslatorInterface $translator,
@@ -78,6 +81,6 @@ class LoginController
 
     protected function getPostLoginDestination(): string
     {
-        return '/';
+        return $this->afterLoginRoute ? $this->router->generate($this->afterLoginRoute) : '/';
     }
 }

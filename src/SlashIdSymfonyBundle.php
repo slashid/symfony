@@ -37,8 +37,10 @@ class SlashIdSymfonyBundle extends AbstractBundle
                 ->public()
                 ->args([
                     $config['login_form'],
+                    $config['route_after_login'],
                     $config['translation_strings'],
                     new Reference('twig'),
+                    new Reference('router'),
                     new Reference('security.helper'),
                     new Reference('slashid'),
                     new Reference('translator', ContainerInterface::NULL_ON_INVALID_REFERENCE)

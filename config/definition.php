@@ -31,6 +31,9 @@ return static function (DefinitionConfigurator $definition) {
             ->cannotBeOverwritten()
             ->end()
 
+        ->scalarNode('route_after_login')
+            ->end()
+
         ->arrayNode('login_form')->addDefaultsIfNotSet()->children()
             ->booleanNode('analytics')
                 ->defaultTrue()
