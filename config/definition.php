@@ -16,5 +16,13 @@ return static function (DefinitionConfigurator $definition) {
             ->defaultValue('%env(trim:string:SLASHID_API_KEY)%')
             ->cannotBeOverwritten()
             ->end()
+
+        ->arrayNode('login_form')->children()
+            ->booleanNode('analytics')
+                ->defaultTrue()
+                ->end()
+            ->variableNode('configuration')
+                ->end()
+        ->end()
     ->end();
 };

@@ -12,6 +12,7 @@ use Twig\Environment;
 class LoginController
 {
     public function __construct(
+        protected array $config,
         protected Environment $twig,
         protected Security $security,
         protected SlashIdSdk $sdk,
@@ -23,11 +24,9 @@ class LoginController
             return new RedirectResponse($this->getPostLoginDestination());
         }
 
-        // @todo Add configuration
-        $attributes = [
+        $attributes = $this->config['configuration'] + [
             'oid' => $this->sdk->getOrganizationId(),
             'environment' => $this->sdk->getEnvironment(),
-            // @todo add texts with strings
             'token-storage' => 'memory',
             'on-success' => 'slashIdLoginSuccessCallback',
             'slot-success-indeterminate' => 'true',
@@ -37,6 +36,11 @@ class LoginController
             ],
         ];
 
+        if ($this->config['analytics']) {
+            $attributes['analytics-enabled'] = 'analytics-enabled';
+        }
+
+        // Converts arrays to JSON.
         $attributes = array_map(fn($option) => is_array($option) ? json_encode($option) : $option, $attributes);
 
         return new Response($this->twig->render('@slashid/login/login.html.twig', [

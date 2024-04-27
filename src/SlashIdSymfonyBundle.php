@@ -35,6 +35,7 @@ class SlashIdSymfonyBundle extends AbstractBundle
             ->set(LoginController::class)
                 ->public()
                 ->args([
+                    $config['login_form'],
                     new Reference('twig'),
                     new Reference('security.helper'),
                     new Reference('slashid'),
@@ -75,7 +76,7 @@ class SlashIdSymfonyBundle extends AbstractBundle
                     $config['organization_id'],
                     $config['api_key'],
                 ])
-            ->alias(SlashIdSdk::class, 'slashid')
+                ->alias(SlashIdSdk::class, 'slashid')
 
             ->set('slashid.user_provider', UserProvider::class)
                 ->public()
