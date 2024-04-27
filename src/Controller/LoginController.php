@@ -40,11 +40,15 @@ class LoginController
             $attributes['analytics-enabled'] = 'analytics-enabled';
         }
 
+
+
         // Converts arrays to JSON.
         $attributes = array_map(fn($option) => is_array($option) ? json_encode($option) : $option, $attributes);
 
         return new Response($this->twig->render('@slashid/login/login.html.twig', [
             'attributes' => $attributes,
+            'has_bundled' => !$this->config['override_bundled_javascript'],
+            'has_glue' => !$this->config['override_javascript_glue'],
         ]));
     }
 

@@ -6,8 +6,12 @@
 
 {% block javascripts %}
     {% block importmap %}{{ importmap('app') }}{% endblock %}
-    <script src="{{ asset('bundles/slashid/slashid.symfony-web-login.js') }}"></script>
-    <script type="module" src="/bundles/slashid/bundled-form/main.js"></script>
+    {% if has_glue %}
+        <script src="{{ asset('bundles/slashid/slashid.symfony-web-login.js') }}"></script>
+    {% endif %}
+    {% if has_bundled %}
+        <script type="module" src="/bundles/slashid/bundled-form/main.js"></script>
+    {% endif %}
 {% endblock %}
 
 
