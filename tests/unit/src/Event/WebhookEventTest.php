@@ -4,7 +4,6 @@ namespace SlashId\Symfony\Event;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Symfony\Contracts\EventDispatcher\Event;
 
 #[CoversClass(WebhookEvent::class)]
 class WebhookEventTest extends TestCase
