@@ -89,6 +89,79 @@ In the example above, any requests to `/api/****` will be logged in by sending t
 
 :warning: **Attention!** If you do not add `stateless: true`, requests with a `Authorization: Bearer <<TOKEN>>` header WILL create a cookie login.
 
+## Configuration
+
+If you want to customize the SlashID integration by creating a `config/packages/slashid.yaml` file inside your Symfony installation, for instance:
+
+```yaml
+# config/packages/slashid.yaml
+
+slashid:
+    login_form:
+        configuration:
+            factors:
+                - { "method": "webauthn" }
+                - { "method": "email_link" }
+                - { "method": "password" }
+        css_override:
+            --sid-color-primary: "#f00"
+            --sid-color-primary-hover: "#900"
+
+    route_after_login: 'dashboard'
+```
+
+These are the configuration options:
+
+| Configuration                                    | Default value | Description                                                                                                    |
+|--------------------------------------------------|---------------|----------------------------------------------------------------------------------------------------------------|
+| `slashid.login_form.analytics`                   | `true`        | Whether or not to to include Analytics in the login form.                                                      |
+| `slashid.login_form.configuration`               | `[]`          | See [Login form configuration](#login-form-configuration)                                                      |
+| `slashid.login_form.css_override`                | `null`        | See [Login form theme](#login-form-theme)                                                                      |
+| `slashid.login_form.override_bundled_javascript` | `false`       | Set true to override the Bundled JavaScript form, see [Overriding the login form](#overriding-the-login-form). |
+| `slashid.login_form.override_javascript_glue`    | `false`       | Set true to override the JavaScript glue code, see [Overriding the login form](#overriding-the-login-form).    |
+| `slashid.route_after_login`                      | `null`        | The route to redirect the user after login. If not set, the user will be redirected to `/`.                    |
+
+### Login form configuration
+
+The login form is a bundled version of [SlashID's React SDK](https://developer.slashid.dev/docs/access/react-sdk). As such all options in the components are usable here, just note that you have to convert `camelCase` to `kebab-case` (see examples below).
+
+For instance, to use the dark theme, do this:
+
+```yaml
+# config/packages/slashid.yaml
+
+slashid:
+    login_form:
+        configuration:
+            theme-props:
+                theme: dark
+```
+
+If you want to enable password login and disable email link login, do this:
+
+```yaml
+# config/packages/slashid.yaml
+
+slashid:
+    login_form:
+        configuration:
+            factors:
+                - { "method": "webauthn" }
+                - { "method": "password" }
+```
+
+You can also override [any of the CSS variables provided by the React SDK](https://developer.slashid.dev/docs/access/react-sdk/reference/components/react-sdk-reference-form#css-custom-properties-variables). For instance, to make the login button red with a darker red hover, you can do the following:
+
+```yaml
+# config/packages/slashid.yaml
+
+slashid:
+    login_form:
+        css_override:
+            --sid-color-primary: "#f00"
+            --sid-color-primary-hover: "#900"
+```
+
 ## Groups
 
 ### Group-based access in routes
