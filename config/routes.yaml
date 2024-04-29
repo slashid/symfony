@@ -1,8 +1,8 @@
-login:
+slashid.login:
     path: /login
     controller: SlashId\Symfony\Controller\LoginController::login
 
-login.callback:
+slashid.login.callback:
     path: /login/callback
     controller: SlashId\Symfony\Controller\LoginController::loginCallback
 

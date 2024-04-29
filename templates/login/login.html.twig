@@ -21,6 +21,11 @@
     {% if has_bundled %}
         <script type="module" src="/bundles/slashid/bundled-form/main.js"></script>
     {% endif %}
+    <script>
+        SlashIdSettings = {
+            loginCallbackUrl: "{{ login_callback_url }}",
+        }
+    </script>
 {% endblock %}
 
 

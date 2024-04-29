@@ -1,6 +1,6 @@
 function slashIdLoginSuccessCallback(user) {
     // Convert the SlashID token into a Symfony cookie.
-    fetch('/login/callback', {
+    fetch(SlashIdSettings.loginCallbackUrl, {
         method: "POST",
         cache: "no-cache",
         headers: {
