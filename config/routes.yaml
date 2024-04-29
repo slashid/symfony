@@ -1,0 +1,7 @@
+login:
+    path: /login
+    controller: SlashId\Symfony\Controller\LoginController::login
+
+login.callback:
+    path: /login/callback
+    controller: SlashId\Symfony\Controller\LoginController::loginCallback
