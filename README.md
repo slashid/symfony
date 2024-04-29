@@ -375,3 +375,36 @@ The listener will receive the event of class `\SlashId\Symfony\Event\WebhookEven
 * `$event->getEventName()` will return the trigger name, such as `AuthenticationFailed_v1`, that is, `->trigger_content->event_metadata->event_name` in the JSON sent to the webhook.
 * `$event->getEventId()` will return the event ID, such as `68a850ca-b2ee-46ce-8592-410813037739`, that is, `->trigger_content->event_metadata->event_id` in the JSON sent to the webhook.
 * `$event->getTriggerContent()` will return the full content of the webhook call, that is, `->trigger_content` in the JSON sent to the webhook.
+
+## Overriding routes
+
+By default, the Symfony bundle exposes three route:
+
+* `/login` - the login form
+* `/login/callback` - a route called in the background to complete the login process
+* `/slashid/webhook` - the webhook listener
+
+In some cases, you might not want to expose either the webhook or the login form, or even to change the URLs for those routes. To accomplish that, first remove the `_slashid_symfony_bundle:` line from `config/routes.yaml`, then add the routes manually:
+
+```yaml
+# config/routes.yaml
+
+# Remove the two lines below.
+#_slashid_symfony_bundle:
+#    resource: '@slashid/config/routes.yaml'
+
+slashid.login:
+    path: /custon-path-for-login
+    controller: SlashId\Symfony\Controller\LoginController::login
+
+slashid.login.callback:
+    path: /custon-path-for-login/callback
+    controller: SlashId\Symfony\Controller\LoginController::loginCallback
+
+# In this example we don't enable the webhook listener.
+#slashid.webhook:
+#    path: /slashid/webhook
+#    controller: SlashId\Symfony\Controller\WebhookController::webhook
+```
+
+:warning: **Note:** you *must* keep the names of the routes: `slashid.login`, `slashid.login.callback` and `slashid.webhook`.
