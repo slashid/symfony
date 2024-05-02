@@ -3,7 +3,11 @@
 namespace SlashId\Symfony;
 
 use SlashId\Php\SlashIdSdk;
+use SlashId\Symfony\Command\Webhook\WebhookDeletionCommand;
+use SlashId\Symfony\Command\Webhook\WebhookListCommand;
+use SlashId\Symfony\Command\Webhook\WebhookRegistrationCommand;
 use SlashId\Symfony\Controller\LoginController;
+use SlashId\Symfony\Controller\WebhookController;
 use SlashId\Symfony\Security\Authenticator;
 use SlashId\Symfony\Security\UserProvider;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
@@ -35,6 +39,34 @@ class SlashIdSymfonyBundle extends AbstractBundle
                     new Reference('security.helper'),
                     new Reference('slashid'),
                 ])
+
+            ->set(WebhookController::class)
+                ->public()
+                ->args([
+                    new Reference('cache.app'),
+                    new Reference('event_dispatcher'),
+                    new Reference('request_stack'),
+                    new Reference('slashid'),
+                ])
+
+            ->set(WebhookListCommand::class)
+                ->args([
+                    new Reference('slashid'),
+                ])
+                ->tag('console.command', ['command' => 'slashid:webhook:list'])
+
+            ->set(WebhookRegistrationCommand::class)
+                ->args([
+                    new Reference('router'),
+                    new Reference('slashid'),
+                ])
+                ->tag('console.command', ['command' => 'slashid:webhook:register'])
+
+            ->set(WebhookDeletionCommand::class)
+                ->args([
+                    new Reference('slashid'),
+                ])
+                ->tag('console.command', ['command' => 'slashid:webhook:delete'])
 
             ->set('slashid', SlashIdSdk::class)
                 ->public()

@@ -5,7 +5,11 @@ namespace SlashId\Test\Symfony\Security;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SlashId\Php\SlashIdSdk;
+use SlashId\Symfony\Command\Webhook\WebhookDeletionCommand;
+use SlashId\Symfony\Command\Webhook\WebhookListCommand;
+use SlashId\Symfony\Command\Webhook\WebhookRegistrationCommand;
 use SlashId\Symfony\Controller\LoginController;
+use SlashId\Symfony\Controller\WebhookController;
 use SlashId\Symfony\SlashIdSymfonyBundle;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -46,6 +50,10 @@ class SlashIdSymfonyBundleTest extends TestCase
         $this->assertEquals([
             'service_container',
             LoginController::class,
+            WebhookController::class,
+            WebhookListCommand::class,
+            WebhookRegistrationCommand::class,
+            WebhookDeletionCommand::class,
             'slashid',
             'slashid.user_provider',
             'slashid.authenticator',
