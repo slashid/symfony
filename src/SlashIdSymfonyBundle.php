@@ -43,7 +43,7 @@ class SlashIdSymfonyBundle extends AbstractBundle
                     new Reference('router'),
                     new Reference('security.helper'),
                     new Reference('slashid'),
-                    new Reference('translator', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+                    new Reference('translator', ContainerInterface::NULL_ON_INVALID_REFERENCE),
                 ])
 
             ->set(WebhookController::class)

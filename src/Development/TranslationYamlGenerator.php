@@ -9,7 +9,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class TranslationYamlGenerator
 {
-    const SOURCE_URL = 'https://raw.githubusercontent.com/slashid/javascript/main/packages/react/src/components/text/constants.ts';
+    public const SOURCE_URL = 'https://raw.githubusercontent.com/slashid/javascript/main/packages/react/src/components/text/constants.ts';
 
     public static function generate(): void
     {
@@ -21,7 +21,7 @@ final class TranslationYamlGenerator
         $jsonEndPosition = strpos($source, '};');
         $source = substr($source, $jsonStartPosition + 1, $jsonEndPosition - $jsonStartPosition - 1);
         $sourceLines = explode("\n", $source);
-        $sourceLines = array_values(array_filter($sourceLines, fn($line) => strpos(trim($line), '"') === 0));
+        $sourceLines = array_values(array_filter($sourceLines, fn($line) => 0 === strpos(trim($line), '"')));
 
         // Remove comma in the last line, to make JSON valid.
         $lastLine = array_pop($sourceLines);
@@ -30,7 +30,7 @@ final class TranslationYamlGenerator
 
         // Reconstructs the JSON and makes it into a string.
         $validJson = '{' . implode("\n", $sourceLines) . '}';
-        $strings = json_decode($validJson, TRUE);
+        $strings = json_decode($validJson, true);
 
         // Removes invalid string.
         unset($strings['']);
