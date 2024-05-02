@@ -17,6 +17,9 @@ final class TranslationYamlGenerator
 
         // Downloads file and converts TypeScript into JSON.
         $source = file_get_contents(self::SOURCE_URL);
+        if (!$source) {
+            throw new \Exception('Could not locate ' . self::SOURCE_URL);
+        }
         $jsonStartPosition = strpos($source, '{');
         $jsonEndPosition = strpos($source, '};');
         $source = substr($source, $jsonStartPosition + 1, $jsonEndPosition - $jsonStartPosition - 1);
@@ -24,12 +27,14 @@ final class TranslationYamlGenerator
         $sourceLines = array_values(array_filter($sourceLines, fn($line) => 0 === strpos(trim($line), '"')));
 
         // Remove comma in the last line, to make JSON valid.
+        /** @var string */
         $lastLine = array_pop($sourceLines);
         $lastLine = trim($lastLine, "\n\r\t\v\0,");
         $sourceLines[] = $lastLine;
 
         // Reconstructs the JSON and makes it into a string.
         $validJson = '{' . implode("\n", $sourceLines) . '}';
+        /** @var string[] */
         $strings = json_decode($validJson, true);
 
         // Removes invalid string.

@@ -3,16 +3,20 @@
 namespace SlashId\Symfony\Controller;
 
 use SlashId\Php\SlashIdSdk;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class LoginController
 {
+    /**
+     * @param mixed[]  $config
+     * @param string[] $translationStrings
+     */
     public function __construct(
         protected array $config,
         protected ?string $afterLoginRoute,
