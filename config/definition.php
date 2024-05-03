@@ -6,7 +6,7 @@ use Symfony\Component\Yaml\Yaml;
 
 return static function (DefinitionConfigurator $definition) {
     // Lists the strings IF the package symfony/translation exists.
-    $translationStrings = NULL;
+    $translationStrings = null;
     if (class_exists(ArrayLoader::class)) {
         $stringsFromYaml = Yaml::parse(file_get_contents(__DIR__ . '/../translations/SlashIdSymfonyBundle.en.yml'));
         $catalogue = (new ArrayLoader())->load($stringsFromYaml, 'en', 'SlashIdSymfonyBundle');
