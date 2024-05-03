@@ -37,6 +37,9 @@ class SlashIdSymfonyBundleTest extends TestCase
             'environment' => SlashIdSdk::ENVIRONMENT_PRODUCTION,
             'organization_id' => 'ORG_ID',
             'api_key' => 'API_KEY',
+            'translation_strings' => [],
+            'route_after_login' => null,
+            'login_form' => [],
         ];
         $parameterBag = new ParameterBag();
         $containerBuilder = new ContainerBuilder($parameterBag);
