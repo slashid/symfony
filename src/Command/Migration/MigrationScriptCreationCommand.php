@@ -93,7 +93,6 @@ class MigrationScriptCreationCommand extends Command
         use SlashId\Symfony\SlashIdUser;
 
         return static function (EntityManagerInterface \$entityManager): array {
-        {
             /** @var array<$className> */
             \$doctrineUsers = \$entityManager->getRepository($className::class)->findAll();
             \$slashIdUsers = [];
