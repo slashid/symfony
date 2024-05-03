@@ -45,6 +45,8 @@ class UserMigrationCommand extends Command
 
         if (empty($users)) {
             $io->error("The script at $filename returned an empty array.");
+
+            return Command::FAILURE;
         }
 
         foreach ($users as $user) {
