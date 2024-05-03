@@ -34,11 +34,6 @@ class MigrationScriptCreationCommand extends Command
         }
 
         $class = $io->ask('Please inform the class of the user model', '\\App\\Entity\\User');
-        if (!is_string($class) || empty($class)) {
-            $io->error('Please input a class.');
-
-            return Command::FAILURE;
-        }
         if (! class_exists($class)) {
             $io->error("Class $class does not exist.");
 
