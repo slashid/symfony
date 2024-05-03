@@ -99,6 +99,9 @@ If you want to customize the SlashID integration by creating a `config/packages/
 slashid:
     login_form:
         configuration:
+            analytics-enabled: false
+            theme-props:
+                theme: dark
             factors:
                 - { "method": "webauthn" }
                 - { "method": "email_link" }
