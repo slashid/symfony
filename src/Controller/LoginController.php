@@ -3,16 +3,20 @@
 namespace SlashId\Symfony\Controller;
 
 use SlashId\Php\SlashIdSdk;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class LoginController
 {
+    /**
+     * @param mixed[]  $config
+     * @param string[] $translationStrings
+     */
     public function __construct(
         protected array $config,
         protected ?string $afterLoginRoute,
@@ -36,17 +40,13 @@ class LoginController
             'environment' => $this->sdk->getEnvironment(),
             'token-storage' => 'memory',
             'on-success' => 'slashIdLoginSuccessCallback',
-            'slot-success-indeterminate' => 'true',
+            'slot-success-indeterminate' => true,
+            'analytics-enabled' => true,
             'factors' => [
                 ['method' => 'webauthn'],
                 ['method' => 'email_link'],
             ],
         ];
-
-        // Adds analytics, if enabled.
-        if ($this->config['analytics']) {
-            $attributes['analytics-enabled'] = NULL;
-        }
 
         // Adds translation strings.
         if ($this->translator) {
@@ -59,8 +59,8 @@ class LoginController
         // Adds CSS configuration.
         $cssOverrides = $this->config['css_override'];
 
-        // Converts arrays to JSON.
-        $attributes = array_map(fn($option) => is_array($option) ? json_encode($option) : $option, $attributes);
+        // Converts arrays and booleans to JSON.
+        $attributes = array_map(fn($option) => is_array($option) || is_bool($option) ? json_encode($option) : $option, $attributes);
 
         // Renders the login form.
         return new Response($this->twig->render('@slashid/login/login.html.twig', [
