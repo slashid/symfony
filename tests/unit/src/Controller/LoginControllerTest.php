@@ -90,6 +90,7 @@ class LoginControllerTest extends TestCase
             ],
             'has_bundled' => !$overrideBundledJavascript,
             'has_glue' => !$overrideJavaScriptGlue,
+            'login_callback_url' => '/login/callback',
         ];
 
         if ($hasTransator) {
@@ -102,6 +103,12 @@ class LoginControllerTest extends TestCase
                     'success.title' => 'Success Title!',
                 });
         }
+
+        $this->router
+            ->expects($this->once())
+            ->method('generate')
+            ->with($this->identicalTo('slashid.login.callback'))
+            ->willReturn('/login/callback');
 
         $this->sdk
             ->expects($this->once())
