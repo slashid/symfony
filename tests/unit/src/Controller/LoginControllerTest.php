@@ -35,22 +35,14 @@ class LoginControllerTest extends TestCase
     public static function dataProviderTestLogin(): array
     {
         $testCases = [
-            [0, 0, 0, 0],
-            [0, 0, 0, 1],
-            [0, 0, 1, 0],
-            [0, 0, 1, 1],
-            [0, 1, 0, 0],
-            [0, 1, 0, 1],
-            [0, 1, 1, 0],
-            [0, 1, 1, 1],
-            [1, 0, 0, 0],
-            [1, 0, 0, 1],
-            [1, 0, 1, 0],
-            [1, 0, 1, 1],
-            [1, 1, 0, 0],
-            [1, 1, 0, 1],
-            [1, 1, 1, 0],
-            [1, 1, 1, 1],
+            [0, 0, 0],
+            [0, 0, 1],
+            [0, 1, 0],
+            [0, 1, 1],
+            [1, 0, 0],
+            [1, 0, 1],
+            [1, 1, 0],
+            [1, 1, 1],
         ];
         return array_map(
             fn($testCase) => array_map(fn($arg) => (bool) $arg, $testCase),
@@ -59,14 +51,13 @@ class LoginControllerTest extends TestCase
     }
 
     #[DataProvider('dataProviderTestLogin')]
-    public function testLogin(bool $hasAnalytics, bool $overrideBundledJavascript, bool $overrideJavaScriptGlue, bool $hasTransator): void
+    public function testLogin(bool $overrideBundledJavascript, bool $overrideJavaScriptGlue, bool $hasTransator): void
     {
         $loginController = new LoginController(
             [
                 'configuration' => [
                     'theme-props' => ['theme' => 'dark'],
                 ],
-                'analytics' => $hasAnalytics,
                 'css_override' => [
                     '--sid-color-primary-hover' => '#900',
                 ],
@@ -90,8 +81,8 @@ class LoginControllerTest extends TestCase
                 'token-storage' => 'memory',
                 'on-success' => 'slashIdLoginSuccessCallback',
                 'slot-success-indeterminate' => 'true',
+                'analytics-enabled' => 'true',
                 'factors' => '[{"method":"webauthn"},{"method":"email_link"}]',
-                'analytics-enabled' => null,
             ],
             'css_overrides' => [
                 '--sid-color-primary-hover' => '#900',
@@ -99,10 +90,6 @@ class LoginControllerTest extends TestCase
             'has_bundled' => !$overrideBundledJavascript,
             'has_glue' => !$overrideJavaScriptGlue,
         ];
-
-        if (!$hasAnalytics) {
-            unset($attributes['attributes']['analytics-enabled']);
-        }
 
         if ($hasTransator) {
             $attributes['attributes']['text'] = '{"initial.title":"","success.title":""}';
