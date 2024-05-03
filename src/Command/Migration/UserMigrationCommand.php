@@ -63,7 +63,7 @@ class UserMigrationCommand extends Command
             'Roles',
             'Groups',
             'Attributes',
-        ], array_map(fn (PersonInterface $person) => [
+        ], array_map(fn(PersonInterface $person) => [
             implode(',', $person->getEmailAddresses()),
             implode(',', $person->getPhoneNumbers()),
             $person->getRegion() ?? '',
@@ -72,18 +72,17 @@ class UserMigrationCommand extends Command
             \json_encode($person->getAllAttributes()),
         ], array_slice($users, 0, 5)));
 
-        if ($io->confirm('Do you want to proceed with importing '.count($users).' users?', false)) {
+        if ($io->confirm('Do you want to proceed with importing ' . count($users) . ' users?', false)) {
             $response = $this->sdk->migration()->migratePersons($users);
-            $io->success($response['successful_imports'].' successfully imported users.');
+            $io->success($response['successful_imports'] . ' successfully imported users.');
 
             // Displays errors if any.
             if ($response['failed_imports'] && $response['failed_csv']) {
                 $logFilePath = $this->scriptDir . '/migration-failed-' . date('Ymdhi') . '.csv';
                 $this->fileSystem->dumpFile($logFilePath, $response['failed_csv']);
-                $io->warning($response['failed_imports']." users failed importing. Check the file $logFilePath for errors.");
+                $io->warning($response['failed_imports'] . " users failed importing. Check the file $logFilePath for errors.");
             }
-        }
-        else {
+        } else {
             $io->warning('Aborted migration.');
         }
 
@@ -96,5 +95,4 @@ class UserMigrationCommand extends Command
             ->setDescription('Bulk import users from Doctrine into SlashID.')
         ;
     }
-
 }

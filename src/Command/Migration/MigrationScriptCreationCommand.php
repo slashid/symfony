@@ -2,13 +2,9 @@
 
 namespace SlashId\Symfony\Command\Migration;
 
-use SlashId\Php\SlashIdSdk;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -73,8 +69,8 @@ class MigrationScriptCreationCommand extends Command
     {
         $count = 0;
         do {
-            $backupFilename = $filename.'.bak'.($count ? '.'.$count : '');
-            $count++;
+            $backupFilename = $filename . '.bak' . ($count ? '.' . $count : '');
+            ++$count;
         } while ($this->fileSystem->exists($backupFilename));
 
         $this->fileSystem->copy($filename, $backupFilename);
@@ -87,6 +83,7 @@ class MigrationScriptCreationCommand extends Command
         $fullClassName = ltrim($fullClassName, '\\');
         $classNameParts = explode('\\', $fullClassName);
         $className = array_pop($classNameParts);
+
         return <<<EOS
         <?php
 
