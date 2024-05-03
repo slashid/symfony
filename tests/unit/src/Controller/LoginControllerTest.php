@@ -92,7 +92,14 @@ class LoginControllerTest extends TestCase
         ];
 
         if ($hasTransator) {
-            $attributes['attributes']['text'] = '{"initial.title":"","success.title":""}';
+            $attributes['attributes']['text'] = '{"initial.title":"Initial Title!","success.title":"Success Title!"}';
+            $this->translator
+                ->expects($this->exactly(2))
+                ->method('trans')
+                ->willReturnCallback(fn($string) => match($string) {
+                    'initial.title' => 'Initial Title!',
+                    'success.title' => 'Success Title!',
+                });
         }
 
         $this->sdk
