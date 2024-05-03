@@ -500,3 +500,21 @@ $ php bin/console slashid:import:run
 ```
 
 Any errors that occured in a migration will be output as a CSV. Check the CSV to fix the errors and run again.
+
+## Overriding the login form
+
+### Twig template and how to insert the form in a layout
+
+The login form is rendered in the Twig template `templates/login/login.html.twig`, that extends `base.html.twig`, so that the login form is wrapped by the site's default layout.
+
+If you want to change the template, copy the file `vendor/slashid/symfony/templates/login/login.html.twig` to `templates/bundles/slashid/login/login.html.twig` and change it as you please.
+
+### Using custom JavaScript
+
+The Laravel package comes with a bundle of the [SlashID React SDK](https://developer.slashid.dev/docs/access/react-sdk) and a small JavaScript glue piece of code in `vendor/slashid/symfony/public/slashid.symfony-web-login.js`.
+
+You may want to override the Bundled React SDK to compile your implementation of the React login form. If that's the case, change the option `slashid.login_form.override_bundled_javascript` to `true` in `config/packages/slashid.yaml` to prevent the Bundled React SDK from being loaded.
+
+Alternatively, you may want to override the glue code, to include custom actions after the login. If that's the case, change the option `slashid.login_form.override_javascript_glue` to `true` to prevent the glue code from being loaded.
+
+In both cases, you are responsible for loading your custom code yourself.
