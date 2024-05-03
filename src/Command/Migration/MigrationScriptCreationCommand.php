@@ -92,8 +92,9 @@ class MigrationScriptCreationCommand extends Command
         use SlashId\Php\PersonInterface;
         use SlashId\Symfony\SlashIdUser;
 
-        return static function(EntityManagerInterface \$entityManager): array {
-            /** @var \$className[] */
+        return static function (EntityManagerInterface \$entityManager): array {
+        {
+            /** @var array<$className> */
             \$doctrineUsers = \$entityManager->getRepository($className::class)->findAll();
             \$slashIdUsers = [];
 
@@ -102,7 +103,7 @@ class MigrationScriptCreationCommand extends Command
                 unset(\$roles[array_search('ROLE_USER', \$roles)]);
 
                 // Converts "ROLE_ADMIN" into "Admin".
-                \$roles = array_map(fn(string \$role) => ucwords(strtolower(str_replace('_', ' ', str_replace('ROLE_', '', \$role)))), \$roles);
+                \$roles = array_map(fn (string \$role) => ucwords(strtolower(str_replace('_', ' ', str_replace('ROLE_', '', \$role)))), \$roles);
 
                 \$slashIdUser = new SlashIdUser();
                 \$slashIdUser
@@ -126,6 +127,7 @@ class MigrationScriptCreationCommand extends Command
 
             return \$slashIdUsers;
         };
+
         EOS;
     }
 }
