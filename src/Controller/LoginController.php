@@ -68,7 +68,7 @@ class LoginController
             'css_overrides' => $cssOverrides,
             'has_bundled' => !$this->config['override_bundled_javascript'],
             'has_glue' => !$this->config['override_javascript_glue'],
-            'login_callback_url' => $this->router->generate('slashid.login.callback')
+            'login_callback_url' => $this->router->generate('slashid.login.callback'),
         ]));
     }
 
