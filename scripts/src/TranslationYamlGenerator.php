@@ -1,6 +1,6 @@
 <?php
 
-namespace SlashId\Symfony\Development;
+namespace SlashId\Development\Symfony;
 
 use Symfony\Component\Yaml\Yaml;
 

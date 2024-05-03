@@ -9,6 +9,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "SlashId\\Development\\Symfony\\": "scripts/src",
             "SlashId\\Test\\Symfony\\": "tests/unit/src"
         }
     },
@@ -48,6 +49,6 @@
             "composer test-phpstan",
             "composer test-phpunit-coverage"
         ],
-        "development-generate-translation": "SlashId\\Symfony\\Development\\TranslationYamlGenerator::generate"
+        "development-generate-translation": "SlashId\\Development\\Symfony\\TranslationYamlGenerator::generate"
     }
 }
