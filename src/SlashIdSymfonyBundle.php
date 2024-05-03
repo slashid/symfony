@@ -3,6 +3,8 @@
 namespace SlashId\Symfony;
 
 use SlashId\Php\SlashIdSdk;
+use SlashId\Symfony\Command\Migration\MigrationScriptCreationCommand;
+use SlashId\Symfony\Command\Migration\UserMigrationCommand;
 use SlashId\Symfony\Command\Webhook\WebhookDeletionCommand;
 use SlashId\Symfony\Command\Webhook\WebhookListCommand;
 use SlashId\Symfony\Command\Webhook\WebhookRegistrationCommand;
@@ -73,6 +75,22 @@ class SlashIdSymfonyBundle extends AbstractBundle
                     new Reference('slashid'),
                 ])
                 ->tag('console.command', ['command' => 'slashid:webhook:delete'])
+
+            ->set(MigrationScriptCreationCommand::class)
+                ->args([
+                    $config['migration_script_folder'],
+                    new Reference('filesystem'),
+                ])
+                ->tag('console.command', ['command' => 'slashid:import:create-script'])
+
+            ->set(UserMigrationCommand::class)
+                ->args([
+                    $config['migration_script_folder'],
+                    new Reference('doctrine.orm.default_entity_manager'),
+                    new Reference('filesystem'),
+                    new Reference('slashid'),
+                ])
+                ->tag('console.command', ['command' => 'slashid:import:run'])
 
             ->set('slashid', SlashIdSdk::class)
                 ->public()

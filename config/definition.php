@@ -31,6 +31,9 @@ return static function (DefinitionConfigurator $definition) {
             ->cannotBeOverwritten()
             ->end()
 
+        ->scalarNode('migration_script_folder')
+            ->defaultValue('%kernel.project_dir%/migrations/slashid')
+            ->end()
         ->scalarNode('route_after_login')
             ->end()
 

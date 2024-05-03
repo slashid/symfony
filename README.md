@@ -115,14 +115,15 @@ slashid:
 
 These are the configuration options:
 
-| Configuration                                    | Default value | Description                                                                                                    |
-|--------------------------------------------------|---------------|----------------------------------------------------------------------------------------------------------------|
-| `slashid.login_form.analytics`                   | `true`        | Whether or not to to include Analytics in the login form.                                                      |
-| `slashid.login_form.configuration`               | `[]`          | See [Login form configuration](#login-form-configuration)                                                      |
-| `slashid.login_form.css_override`                | `null`        | See [Login form theme](#login-form-theme)                                                                      |
-| `slashid.login_form.override_bundled_javascript` | `false`       | Set true to override the Bundled JavaScript form, see [Overriding the login form](#overriding-the-login-form). |
-| `slashid.login_form.override_javascript_glue`    | `false`       | Set true to override the JavaScript glue code, see [Overriding the login form](#overriding-the-login-form).    |
-| `slashid.route_after_login`                      | `null`        | The route to redirect the user after login. If not set, the user will be redirected to `/`.                    |
+| Configuration                                    | Default value                             | Description                                                                                                    |
+|--------------------------------------------------|-------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `slashid.login_form.analytics`                   | `true`                                    | Whether or not to to include Analytics in the login form.                                                      |
+| `slashid.login_form.configuration`               | `[]`                                      | See [Login form configuration](#login-form-configuration)                                                      |
+| `slashid.login_form.css_override`                | `null`                                    | See [Login form theme](#login-form-theme)                                                                      |
+| `slashid.login_form.override_bundled_javascript` | `false`                                   | Set true to override the Bundled JavaScript form, see [Overriding the login form](#overriding-the-login-form). |
+| `slashid.login_form.override_javascript_glue`    | `false`                                   | Set true to override the JavaScript glue code, see [Overriding the login form](#overriding-the-login-form).    |
+| `slashid.route_after_login`                      | `null`                                    | The route to redirect the user after login. If not set, the user will be redirected to `/`.                    |
+| `slashid.migration_script_folder`                | `%kernel.project_dir%/migrations/slashid` | The folder where to create the migration script. See [User Migration](#user-migration).                        |
 
 ### Login form configuration
 
@@ -411,3 +412,109 @@ slashid.login.callback:
 ```
 
 :warning: **Note:** you *must* keep the names of the routes: `slashid.login`, `slashid.login.callback` and `slashid.webhook`.
+
+## User Migration
+
+If you are installing SlashID in an existing Symfony website, you will probably already have a user base that you'll want to migrate to SlashID's database. This is made easy with two migration commands.
+
+First, you have to run the command `php bin/console slashid:import:create-script`. It will ask you the User class in your installation, usually `\App\Models\User`.
+
+```
+$ php bin/console slashid:import:create-script
+
+ Please inform the class of the user model [\App\Entity\User]:
+ >
+
+
+ [OK] The Slash ID migration script has been created at
+      /var/www/symfony/migrations/slashid/user-migration.php. Please open the file and modify it
+      according to the instructions in it.
+
+```
+
+A script will be created in `migrations/slashid/user-migration.php` (you can customize the folder destination by changing the `migration_script_folder` option). It will look like this:
+
+```php
+<?php
+
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use SlashId\Php\PersonInterface;
+use SlashId\Symfony\SlashIdUser;
+
+return static function (EntityManagerInterface $entityManager): array {
+    /** @var array<User> */
+    $doctrineUsers = $entityManager->getRepository(User::class)->findAll();
+    $slashIdUsers = [];
+
+    foreach ($doctrineUsers as $doctrineUser) {
+        $roles = $doctrineUser->getRoles();
+        unset($roles[array_search('ROLE_USER', $roles)]);
+
+        // Converts "ROLE_ADMIN" into "Admin".
+        $roles = array_map(fn (string $role) => ucwords(strtolower(str_replace('_', ' ', str_replace('ROLE_', '', $role)))), $roles);
+
+        $slashIdUser = new SlashIdUser();
+        $slashIdUser
+            ->addEmailAddress($doctrineUser->getEmail())
+            ->setLegacyPasswordToMigrate($doctrineUser->getPassword())
+            // Uncomment if you want to set the phone number.
+            // ->addPhoneNumber($doctrineUser->getPhoneNumber())
+            ->setGroups($roles)
+            // Uncomment if you want to specify a region for the user.
+            // ->setRegion('us-iowa')
+            ->setBucketAttributes(PersonInterface::BUCKET_ORGANIZATION_END_USER_NO_ACCESS, [
+                // List the user attributes you want to migrate, grouped by bucket.
+                'old_id' => $doctrineUser->getUserIdentifier(),
+                // 'first_name' => $doctrineUser->getFirstName(),
+                // 'last_name' => $doctrineUser->getLastName(),
+            ])
+        ;
+
+        $slashIdUsers[] = $slashIdUser;
+    }
+
+    return $slashIdUsers;
+};
+```
+
+You must adapt the `user-migration.php` to model the data to be migrated as you want, especially adding the attributes you want. The script must return an array of `\SlashId\Symfony\SlashIdUser` with all the users you want to bulk import into SlashID.
+
+After adapting the script to your needs, run `php bin/console slashid:import:run`, e.g.:
+
+```
+$ php bin/console slashid:import:run
++------------------------+---------------+--------+-------+--------+-------------------------------------------------------------------------------------------------------------------------------+
+| Emails                 | Phone numbers | Region | Roles | Groups | Attributes                                                                                                                    |
++------------------------+---------------+--------+-------+--------+-------------------------------------------------------------------------------------------------------------------------------+
+| rattazzi@example.com   |               |        |       |        | {"end_user_no_access":{"old_id":1,"firstname":"Urbano","email_verified_at":null,"lastname":"Rattazzi","username":"rattazzi"}} |
+| nitti@example.com      |               |        |       |        | {"end_user_no_access":{"old_id":2,"firstname":"Francesco","email_verified_at":null,"lastname":"Nitti","username":"nitti"}}    |
+| cavour@example.com     |               |        |       |        | {"end_user_no_access":{"old_id":3,"firstname":"Camillo","email_verified_at":null,"lastname":"Cavour","username":"cavour"}}    |
++------------------------+---------------+--------+-------+--------+-------------------------------------------------------------------------------------------------------------------------------+
+
+ Do you want to proceed with importing 3 users? (yes/no) [no]:
+ > yes
+
+2 successfully imported users.
+1 users failed to import. Check the file /var/www/symfony/migrations/slashid/migration-failed-202403271142.csv for errors.
+```
+
+Any errors that occured in a migration will be output as a CSV. Check the CSV to fix the errors and run again.
+
+## Overriding the login form
+
+### Twig template and how to insert the form in a layout
+
+The login form is rendered in the Twig template `templates/login/login.html.twig`, that extends `base.html.twig`, so that the login form is wrapped by the site's default layout.
+
+If you want to change the template, copy the file `vendor/slashid/symfony/templates/login/login.html.twig` to `templates/bundles/slashid/login/login.html.twig` and change it as you please.
+
+### Using custom JavaScript
+
+The Laravel package comes with a bundle of the [SlashID React SDK](https://developer.slashid.dev/docs/access/react-sdk) and a small JavaScript glue piece of code in `vendor/slashid/symfony/public/slashid.symfony-web-login.js`.
+
+You may want to override the Bundled React SDK to compile your implementation of the React login form. If that's the case, change the option `slashid.login_form.override_bundled_javascript` to `true` in `config/packages/slashid.yaml` to prevent the Bundled React SDK from being loaded.
+
+Alternatively, you may want to override the glue code, to include custom actions after the login. If that's the case, change the option `slashid.login_form.override_javascript_glue` to `true` to prevent the glue code from being loaded.
+
+In both cases, you are responsible for loading your custom code yourself.
