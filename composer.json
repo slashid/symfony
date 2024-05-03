@@ -41,8 +41,8 @@
         "test-cs": "vendor/bin/php-cs-fixer check --rules=@Symfony,@PER-CS2.0 .",
         "test-cs-fix": "vendor/bin/php-cs-fixer fix --rules=@Symfony,@PER-CS2.0 .",
         "test-phpstan": "vendor/bin/phpstan analyse src -l 9",
-        "test-phpunit": "vendor/bin/phpunit --fail-on-warning --fail-on-risky --fail-on-notice tests/unit/",
-        "test-phpunit-coverage": "vendor/bin/phpunit --fail-on-warning --fail-on-risky --fail-on-notice --coverage-html tests/coverage --coverage-filter src/ tests/unit/",
+        "test-phpunit": "vendor/bin/phpunit --display-warnings --fail-on-warning --fail-on-risky --fail-on-notice tests/unit/",
+        "test-phpunit-coverage": "vendor/bin/phpunit --display-warnings --fail-on-warning --fail-on-risky --fail-on-notice --coverage-html tests/coverage --coverage-filter src/ tests/unit/",
         "test": [
             "composer test-cs",
             "composer test-phpstan",
