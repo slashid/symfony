@@ -2,12 +2,25 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/slashid/bundled-form/style.css') }}">
+    {% if css_overrides %}
+        <style type="text/css">
+            .sid-theme-root {
+                {% for variable,value in css_overrides %}
+                    {{ variable }}: {{ value }};
+                {% endfor %}
+            }
+        </style>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
     {% block importmap %}{{ importmap('app') }}{% endblock %}
-    <script src="{{ asset('bundles/slashid/slashid.symfony-web-login.js') }}"></script>
-    <script type="module" src="/bundles/slashid/bundled-form/main.js"></script>
+    {% if has_glue %}
+        <script src="{{ asset('bundles/slashid/slashid.symfony-web-login.js') }}"></script>
+    {% endif %}
+    {% if has_bundled %}
+        <script type="module" src="/bundles/slashid/bundled-form/main.js"></script>
+    {% endif %}
 {% endblock %}
 
 

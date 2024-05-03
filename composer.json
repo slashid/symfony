@@ -9,6 +9,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "SlashId\\Development\\Symfony\\": "scripts/src",
             "SlashId\\Test\\Symfony\\": "tests/unit/src"
         }
     },
@@ -20,7 +21,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "slashid/php": "1.0.2"
+        "slashid/php": "1.0.2",
+        "symfony/yaml": "^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.54",
@@ -33,18 +35,20 @@
         "symfony/security-http": "^7",
         "symfony/config": "^7",
         "symfony/security-bundle": "^7",
-        "symfony/routing": "^7.0"
+        "symfony/routing": "^7.0",
+        "symfony/translation": "^7.0"
     },
     "scripts": {
         "test-cs": "vendor/bin/php-cs-fixer check --rules=@Symfony,@PER-CS2.0 .",
         "test-cs-fix": "vendor/bin/php-cs-fixer fix --rules=@Symfony,@PER-CS2.0 .",
         "test-phpstan": "vendor/bin/phpstan analyse src -l 9",
-        "test-phpunit": "vendor/bin/phpunit --fail-on-warning --fail-on-risky --fail-on-notice tests/unit/",
-        "test-phpunit-coverage": "vendor/bin/phpunit --fail-on-warning --fail-on-risky --fail-on-notice --coverage-html tests/coverage --coverage-filter src/ tests/unit/",
+        "test-phpunit": "vendor/bin/phpunit --display-warnings --fail-on-warning --fail-on-risky --fail-on-notice tests/unit/",
+        "test-phpunit-coverage": "vendor/bin/phpunit --display-warnings --fail-on-warning --fail-on-risky --fail-on-notice --coverage-html tests/coverage --coverage-filter src/ tests/unit/",
         "test": [
             "composer test-cs",
             "composer test-phpstan",
             "composer test-phpunit-coverage"
-        ]
+        ],
+        "development-generate-translation": "SlashId\\Development\\Symfony\\TranslationYamlGenerator::generate"
     }
 }
