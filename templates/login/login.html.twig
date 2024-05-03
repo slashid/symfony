@@ -28,11 +28,7 @@
 
 <slashid-form
     {% for key,attribute in attributes %}
-        {% if attribute %}
-            {{ key }}="{{ attribute }}"
-        {% else %}
-            {{ key }}
-        {% endif %}
+        {{ key }}="{{ attribute }}"
     {% endfor %}
 ></slashid-form>
 
