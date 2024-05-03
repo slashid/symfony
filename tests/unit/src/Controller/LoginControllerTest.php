@@ -44,6 +44,7 @@ class LoginControllerTest extends TestCase
             [1, 1, 0],
             [1, 1, 1],
         ];
+
         return array_map(
             fn($testCase) => array_map(fn($arg) => (bool) $arg, $testCase),
             $testCases,
@@ -96,7 +97,7 @@ class LoginControllerTest extends TestCase
             $this->translator
                 ->expects($this->exactly(2))
                 ->method('trans')
-                ->willReturnCallback(fn($string) => match($string) {
+                ->willReturnCallback(fn($string) => match ($string) {
                     'initial.title' => 'Initial Title!',
                     'success.title' => 'Success Title!',
                 });
