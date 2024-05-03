@@ -34,7 +34,7 @@ class UserMigrationCommand extends Command
             return Command::FAILURE;
         }
 
-        $closure = require_once $filename;
+        $closure = require $filename;
         $users = $closure($this->entityManager);
 
         if (!is_array($users)) {
