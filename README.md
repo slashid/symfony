@@ -278,9 +278,9 @@ You can also use the `hasGroup` / `hasAnyGroup` / `hasAllGroups` methods to buil
 
 See [SlashID documentation on Webhooks](https://developer.slashid.dev/docs/access/guides/webhooks/introduction).
 
-### Artisan webhook commands
+### CLI webhook commands
 
-To use webhooks, you need first to register your URL with SlashID. Webhooks are managed via API, but this package provides three Artisan commands to help you manage them.
+To use webhooks, you need first to register your URL with SlashID. Webhooks are managed via API, but this package provides three CLI commands to help you manage them.
 
 #### How to register webhooks
 
@@ -322,7 +322,7 @@ php bin/console slashid:webhook:register proxied_webhook PasswordChanged_v1 --ba
 
 #### How to register webhooks for other applications
 
-You can use the artisan command to register webhooks with any arbitrary URL:
+You can use the CLI command to register webhooks with any arbitrary URL:
 
 ```
 php bin/console slashid:webhook:register proxied_webhook PasswordChanged_v1 --webhook-url=https://someotherapplication.example.com/some-arbitrary-url
@@ -382,7 +382,7 @@ The listener will receive the event of class `\SlashId\Symfony\Event\WebhookEven
 
 ## Overriding routes
 
-By default, the Symfony bundle exposes three route:
+By default, the Symfony bundle exposes three routes:
 
 * `/login` - the login form
 * `/login/callback` - a route called in the background to complete the login process
